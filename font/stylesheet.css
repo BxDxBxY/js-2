@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Densmore';
+    src: url('Densmore-Regular.eot');
+    src: local('☞Densmore-Regular'), local('Densmore-Regular'),
+        url('Densmore-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Densmore-Regular.woff2') format('woff2'),
+        url('Densmore-Regular.woff') format('woff'),
+        url('Densmore-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DensmoreBlue';
+    src: url('DensmoreBlue-Regular.eot');
+    src: local('☞DensmoreBlue-Regular'), local('DensmoreBlue-Regular'),
+        url('DensmoreBlue-Regular.eot?#iefix') format('embedded-opentype'),
+        url('DensmoreBlue-Regular.woff2') format('woff2'),
+        url('DensmoreBlue-Regular.woff') format('woff'),
+        url('DensmoreBlue-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DensmorePink';
+    src: url('DensmorePink-Regular.eot');
+    src: local('☞DensmorePink-Regular'), local('DensmorePink-Regular'),
+        url('DensmorePink-Regular.eot?#iefix') format('embedded-opentype'),
+        url('DensmorePink-Regular.woff2') format('woff2'),
+        url('DensmorePink-Regular.woff') format('woff'),
+        url('DensmorePink-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
