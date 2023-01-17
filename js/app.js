@@ -154,9 +154,9 @@ console.log(random, random2)
 // }
 // console.log(example())
 
-let player ={
+var player ={
     name: 'John: $',
-    chips: 0
+    chips: 20
 }
 let cards = []
 let sum =  0
@@ -170,22 +170,37 @@ let sumEl = document.getElementById('sum-el')
 let cardEl = document.querySelector('#cards-el')
 let playerEl = document.querySelector("#player-el")
 playerEl.innerHTML = player.name + player.chips
-
+console.log(player.chips)
+// if (sum === 15) {
+//     player.chips = 299
+// }
 function startGame() {
     
-    isAlive = true
+    if (sum >= 16){
+        location.reload(true)
+        var name = prompt('Please enter your name!', 'John')
+    player.name = name
+    }else if(sum === 15){
+            player.chips = 299
+            playerEl.textContent = player.name + player.chips
+    }
+    else{
+        isAlive = true
     let fisrtCard = random2 
     let secondCard = random 
     cards.push(fisrtCard, secondCard)
     sum += secondCard + fisrtCard
     renderGame()
+    }
 }
+
 function renderGame() {
     if (sum <= 14) {
         message = "Do you want to start a new game?"
     }else if (sum === 15) {
         message = "You have got a BlackJack!"
         hasBlackJack = true
+        player.chips = 299
     }else{
         message = "You'r out of the game!"
         isAlive = false
@@ -281,21 +296,29 @@ const inputBtn = document.getElementById('input-btn')
 const ulEl = document.getElementById('ul-el')
 const inputBtn2 = document.getElementById('input-btn2')
 const showAll = document.getElementById('show-all')
+const cancelEl = document.getElementById('cancel')
+
+
+cancelEl.addEventListener('click', function(){
+    inputEl.value = ''
+})
 
 function renderLead() {
-    // const value = +inputEl.value
-    // if(inputEl.value == ""){}    
-    myLead.push(inputEl.value)
-    // const link = document.createElement("a")
+    if(inputEl.value === ''){
+        alert('Nothing to SAVE')
+    }    
+   else{
     for (let i = 1; i <= 1; i++) {
+        myLead.push(inputEl.value)
         ulEl.innerHTML +=`
         <li class=mb-2>
             <a href=https:///yandex.ru/search/?text=${inputEl.value} target=_blank class="text-center p-1 ps-4 pe-4 link-warning"> ${inputEl.value} </a> 
         </li>
         ` 
+        inputEl.value = ""
+        localStorage.setItem("saved lead", JSON.stringify(myLead))
     }
-    inputEl.value = ""
-    localStorage.setItem("saved lead", JSON.stringify(myLead))
+   }
 }
 inputBtn2.addEventListener('click', function(){
     if (confirm(`Are you sure?`) == true){
@@ -311,10 +334,43 @@ showAll.addEventListener('dblclick', show)
 
 function show(){
     let li = document.createElement('li')
-    ulEl.innerHTML = li.innerHTML =  myLead + " "
+    ulEl.innerHTML = li.innerHTML =  localStorage.getItem("saved lead")
 
     // <a href=https:///yandex.ru/search/?text=${inputEl.value} target=_blank class="text-center p-1 ps-4 pe-4 link-warning"> ${myLead} </a> + ${" "}
 }
+if (localStorage.getItem("saved lead")) {
+    let li = document.createElement('li')
+    ulEl.innerHTML = li.innerHTML =  localStorage.getItem("saved lead")
+}
+// console.log(navigator.geolocation)
+if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+    });
+}
+// console.log(geolocation())
+// console.log(window.statusbar)
+
+// my function central arifmethic
+let arrray1 = [1, 2, 3, 4, 5, 6, 7 ]
+function arifmethic(){
+    for (let i = 0; i < arrray1.length; i++){
+        // console.log(arrray1[i])
+        let s = arrray1[i] + arrray1[i] 
+        // console.log(arrray1[i])
+        console.log(s)
+        return parseInt(s / arrray1.length)
+    }
+    // let sum = arrray1[1] + arrray1[2] + arrray1[3] + arrray1[4] + arrray1[5]
+    // return central = parseInt( sum / arrray1.length)
+}
+console.log(arifmethic())
+// console.log(arrray1)
+
+// yandex.tabs.query({active: true, currentWindow: true}, function(tabs){
+//     console.log(tabs)
+// })
 // localStorage.setItem('first', 'I am the first person')
 // console.log(localStorage.getItem('first'))
 // localStorage.clear()
@@ -326,3 +382,81 @@ function show(){
 
 // let trueOrFalse = Boolean("0")
 // console.log(trueOrFalse)
+
+let seconds = 00 
+let tens = 00
+let minutes = 00
+const getSeconds = document.querySelector('#seconds')
+const getTens = document.querySelector('#tens')
+const getMinutes = document.querySelector('#minutes')
+const btnStart = document.querySelector('#button-start')
+const btnStop = document.querySelector('#button-stop')
+const btnReset = document.querySelector('#button-reset')
+let interval
+btnStart.onclick = function () {
+    clearInterval(interval)
+    interval = setInterval(startTimer, 10)
+}
+btnStop.onclick = function() {
+    clearInterval(interval)
+}
+btnReset.onclick = function() {
+    clearInterval(interval)
+    tens = "00";
+    seconds = "00";
+    minutes = "00";
+    getTens.innerHTML = tens;
+    getSeconds.innerHTML = seconds;
+    getMinutes.innerHTML = minutes;
+ }
+function startTimer() {
+    tens++
+    if(tens <= 9){
+        getTens.innerHTML = "0" + tens
+    } if(tens > 9){
+        getTens.innerHTML = tens
+    }if(tens > 99){
+        seconds++
+        getSeconds.innerHTML = '0' + seconds
+        tens = 0
+        getTens.innerHTML = "0" + 0
+    }if(seconds > 9){
+        getSeconds.innerHTML = seconds
+    }if(seconds >= 60){
+        minutes++
+        getMinutes.innerHTML = '0' + minutes
+        tens = 0
+        getTens.innerHTML = "0" + 0
+        seconds = 0
+        getSeconds.innerHTML = '0' + 0
+    }
+}
+
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
+}
+// showTime();
